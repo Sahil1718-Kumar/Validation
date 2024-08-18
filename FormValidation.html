@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            background-image: url("https://wallpaperaccess.com/full/4893732.jpg");
+            display: flex;
+            justify-content: center;
+        }
+        #form{
+            text-align: center;
+            background: linear-gradient(rgba(8, 8, 8, 0.11),rgba(128, 128, 128, 0.347));
+            backdrop-filter: blur(10px);
+            margin: 3% 1%;
+            height: 100%;
+            width: 40%;
+            color: white;
+            border: 3px white solid;
+            border-radius: 5%;
+            padding-top: 2%;
+            transition: border 1.5s ease-in-out;
+            box-shadow: 10px 10px 20px white, -10px -10px 20px rgb(12, 12, 12);
+            
+        }
+        #form:hover{
+            border: 3px burlywood solid;
+            background: linear-gradient(rgb(8, 8, 8),rgb(69, 68, 69));
+            box-shadow: 10px 10px 20px burlywood, -10px -10px 20px burlywood;
+            
+        }
+        .heading{
+            margin-bottom: 10%;
+            text-decoration: underline;
+            color: blue;
+            text-shadow: 5px 5px 10px blue;
+            font-size: 30px;
+            font-family: 'Lucida Sans';
+        }
+        label{
+            color: gold;
+            padding: 10px 0;
+            font-size: 23px;
+            
+        }
+        #username, #password, #confirm_password, #email, #phone{
+            height: 25px;
+            width: 50%;
+            transition: border 1.5s ease-in-out;
+            margin-bottom: 10px;
+            font-size: 16px;
+            background-color: transparent;
+            color: rgb(255, 254, 252);
+            padding-left: 1%;
+            
+        }
+        hr{
+            margin: 0% 18%;
+            border: 0;
+            height: 1px;
+            background-color: rgb(82, 81, 81);
+        }
+        #button{
+            border: 2px rgb(250, 245, 245) solid;
+            font-size: 18px;
+            color: white;
+            background-color: transparent;
+            padding: 2px 6px;
+            border-radius: 25%;
+            margin-bottom: 2%;
+        }
+        #button:hover{
+            transform: scale(105%);
+            color:burlywood ;
+            box-shadow: 5px 5px 10px burlywood;
+            cursor: pointer;
+            background-color: black;
+        }
+        
+        #form:hover #button{
+            border: 3px burlywood solid;
+        }
+        #form:hover input{
+            border: 3px burlywood solid;
+        }
+        #username:focus, #password:focus, #confirm_password:focus, #email:focus, #phone:focus{
+            border: 3px green solid;
+            background-color: rgb(230, 248, 251);
+            color: rgb(10, 10, 10);
+        }
+        #usernamee, #passwordd, #confirm_passwordd, #emaill, #phonee{
+            background-color: brown;
+            border-radius: 25%;
+            box-shadow: 5px 5px 10px brown;
+            display: inline-block;
+            margin-bottom: 10px;
+            padding: 0 1%;
+        }
+        
+        @media screen and (max-width:800px) {
+            #form{
+                width: min-content;
+                padding: 1%;
+            }
+        }
+    </style>
+    
+</head>
+<body>
+    <form onsubmit="return validation()" id="form">
+        <p class="heading">Account Registration</p>
+        <label>Username</label><br>
+        <input type="text" id="username" autocomplete="off"><br>
+        <span id="usernamee"></span><br>
+        <hr>
+         <label>Password</label><br> 
+        <input type="text" id="password" autocomplete="off"><br>
+        <span id="passwordd"></span><br>
+        <hr>
+        <label>Confirm-Password</label><br> 
+        <input type="text" id="confirm_password" autocomplete="off"><br>
+        <span id="confirm_passwordd"></span><br>
+        <hr>
+        <label>E-mail</label><br>
+        <input type="text" id="email" autocomplete="off"><br>
+        <span id="emaill"></span><br>
+        <hr>
+        <label>Phone no.</label><br>
+        <input type="text" id="phone" autocomplete="off"><br>
+        <span id="phonee"></span><br>
+        <input type="submit" id="button">
+    </form>
+
+    
+    <script>
+        var welcome =document.getElementById("welcome").innerHTML = `<marquee><h1>Hi,User</h1></marquee>`;
+    
+    function validation(){
+        var username =document.getElementById("username").value;
+        var password =document.getElementById("password").value;
+        var confirm_password =document.getElementById("confirm_password").value;
+        var email =document.getElementById("email").value;
+        var phone =document.getElementById("phone").value;
+        var usernamee =document.getElementById("usernamee").innerHTML ="";
+        var passwordd =document.getElementById("passwordd").innerHTML ="";
+        var confirm_passwordd =document.getElementById("confirm_passwordd").innerHTML ="";
+        var emaill =document.getElementById("emaill").innerHTML ="";
+        var phonee =document.getElementById("phonee").innerHTML ="";
+    
+       
+        
+        // Username
+        if(username == ""){
+            document.getElementById("usernamee").innerHTML ="Please enter a username";
+            document.getElementById("username").focus();
+            return false;
+        }
+        if(!isNaN(username)){
+            document.getElementById("usernamee").innerHTML ="Only digits can't be a username";
+            document.getElementById("username").focus();
+            return false;
+        }
+       
+        if((username.length <5) || (username.length >10)){
+            document.getElementById("usernamee").innerHTML ="Must be within 5-10 characters";
+            document.getElementById("username").focus();
+            return false;
+        }
+        
+        // Password
+       if(password == ""){
+        document.getElementById("passwordd").innerHTML ="Please enter password";
+        document.getElementById("password").focus();
+        return false;
+       }
+       if((password.length <6) || (password.length>12)){
+        document.getElementById("passwordd").innerHTML ="Must be within 6-12 characters";
+        document.getElementById("password").focus();
+        return false;
+       }
+    
+       //Confirm Password
+       if(confirm_password == ""){
+        document.getElementById("confirm_passwordd").innerHTML ="Please confirm password";
+        document.getElementById("confirm_password").focus();
+        return false;
+       }
+       if(confirm_password != password){
+        document.getElementById("confirm_passwordd").innerHTML ="Please enter same password";
+        document.getElementById("confirm_password").focus();
+        return false;
+       }
+    
+       // E-mail
+       if(email == ""){
+        document.getElementById("emaill").innerHTML ="Enter your E-mail address";
+        document.getElementById("email").focus();
+        return false;
+       }
+       if((email.charAt(email.length-4) != ".") && (email.charAt(email.length-3) != ".")){
+        document.getElementById("emaill").innerHTML ="Invalid E-mail address";
+        document.getElementById("email").focus();
+        return false;
+       }
+       if(email.charAt(0) == "@"){
+        document.getElementById("emaill").innerHTML ="Invalid E-mail address";
+        document.getElementById("email").focus();
+        return false;
+       }
+       if((email.charAt(email.length-10) != "@") && (email.charAt(email.length-9) != "@") && (email.charAt(email.length-12) != "@")  && (email.charAt(email.length-11) != "@") ){
+        document.getElementById("emaill").innerHTML ="Invalid E-mail address";
+        document.getElementById("email").focus();
+        return false;
+       }
+       if((email.substr(email.length-3,3) != "com") && (email.substr(email.length-2,2) != "in")){
+        document.getElementById("emaill").innerHTML ="..Invalid E-mail address";
+        document.getElementById("email").focus();
+        return false;
+       }
+       
+    
+        // Phone no.
+       if(phone == ""){
+        document.getElementById("phonee").innerHTML = "Enter your Phone no..";
+        document.getElementById("phone").focus();
+        return false;
+       }
+       if(isNaN(phone)){
+        document.getElementById("phonee").innerHTML = "Invalid Phone no..";
+        document.getElementById("phone").focus();
+        return false;
+       }
+       if(phone.length !=10){
+        document.getElementById("phonee").innerHTML = "Invalid Phone no..";
+        document.getElementById("phone").focus();
+        return false;
+       }
+       
+      if(true){
+        alert(`${username},your account has been registered successfully..`);
+        
+        document.getElementById("form").reset();
+        return false;
+      }
+    }
+    
+    
+    
+    </script>
+</body>
+</html>
